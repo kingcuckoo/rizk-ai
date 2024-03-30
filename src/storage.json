@@ -1,0 +1,114 @@
+{
+    "Financial Advisor": [
+      {
+        "Customer": {
+          "Name": "John Doe",
+          "Portfolio": [
+            {
+              "Portfolio Name": "John Doe Priority",
+              "Portfolio item": {
+                "Stocks bought": [
+                  {
+                    "Name": "Apple Inc.",
+                    "Ticker": "AAPL",
+                    "Purchase price": 150.00,
+                    "Quantity": 10
+                  },
+                  {
+                    "Name": "Microsoft Corporation",
+                    "Ticker": "MSFT",
+                    "Purchase price": 250.00,
+                    "Quantity": 5
+                  }
+                ],
+                "Last calculated risk scores": 0.3,
+                "Max money to invest in this Portfolio": 5000.00,
+                "Preferred risk for Portfolio": 0.6
+              }
+            },
+            {
+              "Portfolio Name": "John Doe Secondary",
+              "Portfolio item": {
+                "Stocks bought": [
+                  {
+                    "Name": "Pear Inc.",
+                    "Ticker": "AAPL",
+                    "Purchase price": 150.00,
+                    "Quantity": 10
+                  },
+                  {
+                    "Name": "Microhard Corporation",
+                    "Ticker": "MSFT",
+                    "Purchase price": 250.00,
+                    "Quantity": 5
+                  }
+                ],
+                "Last calculated risk scores": 0.3,
+                "Max money to invest in this Portfolio": 5000.00,
+                "Preferred risk for Portfolio": 0.6
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Customer": {
+          "Name": "Jane Smith",
+          "Portfolio": [
+            {
+              "Portfolio Name": "Jane Smith Main",
+              "Portfolio item": {
+                "Stocks bought": [
+                  {
+                    "Name": "Tesla Inc.",
+                    "Ticker": "TSLA",
+                    "Purchase price": 600.00,
+                    "Quantity": 8
+                  },
+                  {
+                    "Name": "Amazon.com Inc.",
+                    "Ticker": "AMZN",
+                    "Purchase price": 3200.00,
+                    "Quantity": 2
+                  }
+                ],
+                "Last calculated risk scores": 0.4,
+                "Max money to invest in this Portfolio": 8000.00,
+                "Preferred risk for Portfolio": 0.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Customer": {
+          "Name": "Michael Brown",
+          "Portfolio": [
+            {
+              "Portfolio Name": "Micheals Gains",
+              "Portfolio item": {
+                "Stocks bought": [
+                  {
+                    "Name": "NVIDIA Corporation",
+                    "Ticker": "NVDA",
+                    "Purchase price": 500.00,
+                    "Quantity": 6
+                  },
+                  {
+                    "Name": "Intel Corporation",
+                    "Ticker": "INTC",
+                    "Purchase price": 55.00,
+                    "Quantity": 10
+                  }
+                ],
+                "Last calculated risk scores": 0.2,
+                "Max money to invest in this Portfolio": 4000.00,
+                "Preferred risk for Portfolio": 0.7
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  

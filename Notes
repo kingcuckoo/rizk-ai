@@ -1,0 +1,17 @@
+JSON 
+
+Financial Advisor - [
+
+    Customer - {
+        Name - "",
+        Portfolio - [
+            Portfolio 1 - {
+                [Stocks bought (Name ticker,Purchase price, quantity)],
+                last calculated risk scores,
+                Max money to invest in this Portfolio,
+                Preffered risk for Portfolio
+            }
+        ]
+    }
+
+]
