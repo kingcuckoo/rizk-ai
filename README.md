@@ -1,0 +1,2 @@
+# rizq-ai
+streamlit frontend
