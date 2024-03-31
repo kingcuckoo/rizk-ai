@@ -89,7 +89,7 @@ def main():
 
     st.session_state["CUSTOMER_JSON"] = customer_JSON
 
-    page = st.sidebar.radio("Go to", pages)
+    page = st.sidebar.selectbox("Go to", pages)
 
     if page == "Select Customer":
         page1()
