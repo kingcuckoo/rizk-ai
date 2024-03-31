@@ -3,14 +3,39 @@ import requests
 import json
 import pandas as pd
 
-def ai_generate_portfolio_page():
+def add_portfolio_to_storage(portfolio, selected_customer):
+    # Path to your storage.json file
+    file_path = './storage.json'
+
+    # Read the existing data from storage.json
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    # Find the appropriate customer based on the selected customer
+    for customer in data["Financial Advisor"]:
+        if customer["Customer"]["Name"] == selected_customer:
+            # Modify this according to your data structure in storage.json
+            # For example, adding the portfolio to the customer's portfolio list
+            customer["Customer"]["Portfolio"].append({"Generated Portfolio": portfolio})
+            break
+
+    # Write the updated data back to storage.json
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+
+    st.success("Portfolio added to storage.json")
+
+
+
+if (st.session_state.get("portfolio_page") == "AI Generate Portfolio"):
+    st.set_page_config(page_title="Portfolios", page_icon="📈")
     st.title("AI Generate Portfolio")
 
     # Retrieve the selected customer from session state
     selected_customer = st.session_state.get("selected_customer", "No customer selected")
 
     # Inputs
-    risk = st.slider("Risk Number", min_value=0.0, max_value=1.0, step=0.1)
+    risk = st.slider("Expected returns", min_value=0.0, max_value=30.0, step=0.1)
     num_stocks = st.number_input("Number of Stocks", min_value=1, max_value=20)
     theme = st.text_input("Theme String")
     positive = st.checkbox("Positive")
@@ -51,25 +76,3 @@ def ai_generate_portfolio_page():
 
         if st.button("Add Portfolio to Storage"):
             add_portfolio_to_storage(portfolio, selected_customer)
-
-def add_portfolio_to_storage(portfolio, selected_customer):
-    # Path to your storage.json file
-    file_path = './storage.json'
-
-    # Read the existing data from storage.json
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-
-    # Find the appropriate customer based on the selected customer
-    for customer in data["Financial Advisor"]:
-        if customer["Customer"]["Name"] == selected_customer:
-            # Modify this according to your data structure in storage.json
-            # For example, adding the portfolio to the customer's portfolio list
-            customer["Customer"]["Portfolio"].append({"Generated Portfolio": portfolio})
-            break
-
-    # Write the updated data back to storage.json
-    with open(file_path, 'w') as file:
-        json.dump(data, file, indent=4)
-
-    st.success("Portfolio added to storage.json")
