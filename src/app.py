@@ -1,7 +1,5 @@
 import streamlit as st
 import json
-from manual_build_portfolio import manual_build_portfolio_page
-from ai_generate_portfolio import ai_generate_portfolio_page
 
 def read_customer_info():
     # Path to your JSON file
@@ -19,7 +17,7 @@ def page1():
     st.title("Select a Customer")
 
     # List of customers
-    customers = [customer["Customer"]["Name"] for customer in st.session_state.get("CUSTOMER_JSON")["Financial Advisor"]]
+    customers = [customer["Customer"]["Name"] for customer in customer_JSON["Financial Advisor"]]
 
     # Dropdown for selecting a customer
     selected_customer = st.selectbox("Choose a customer", options=customers)
@@ -31,7 +29,7 @@ def page1():
             # Store the selected customer in session state
             st.session_state["selected_customer"] = selected_customer
             st.session_state["customer_selected"] = True
-            st.experimental_rerun()
+            st.elsxperimental_rerun()
         else:
             st.error("Please select a customer")
 
@@ -43,7 +41,7 @@ def page2():
     selected_customer = st.session_state.get("selected_customer", "No customer selected")
     
     # Find the selected customer's data in the JSON
-    customer_data = next((customer for customer in st.session_state.get("CUSTOMER_JSON")["Financial Advisor"] if customer["Customer"]["Name"] == selected_customer), None)
+    customer_data = next((customer for customer in customer_JSON["Financial Advisor"] if customer["Customer"]["Name"] == selected_customer), None)
     
     if customer_data:
         st.write(f"Details for {selected_customer}:")
@@ -61,45 +59,24 @@ def page2():
     else:
         st.write("Customer not found or no portfolios available.")
 
-    # Create a row with two columns for the buttons
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("AI Generate Portfolio"):
-            st.session_state["portfolio_page"] = "AI Generate Portfolio"
-            st.experimental_rerun()
-    with col2:
-        if st.button("Manual Build Portfolio"):
-            st.session_state["portfolio_page"] = "Manual Build Portfolio"
-            st.experimental_rerun()
-
 
 # Main app logic
 def main():
     st.sidebar.title("Navigation")
-    # Check if a customer has been selected
-    if (st.session_state.get("portfolio_page") == "Manual Build Portfolio" or st.session_state.get("portfolio_page") == "AI Generate Portfolio"):
-        if st.session_state.get("portfolio_page") == "Manual Build Portfolio" : 
-            pages = ["Select Customer", "Customer Details", "Manual Build Portfolio"]            
-        if st.session_state.get("portfolio_page") == "AI Generate Portfolio":
-            pages = ["Select Customer", "Customer Details", "AI Generate Portfolio"]
-    elif st.session_state.get("customer_selected", False):
-        pages = ["Select Customer", "Customer Details"]
-    else:
-        pages = ["Select Customer"]
+    pages = ["Select Customer", "Customer Details"]
 
     st.session_state["CUSTOMER_JSON"] = customer_JSON
 
-    page = st.sidebar.radio("Go to", pages)
+    # Check if a customer has been selected
+    if st.session_state.get("customer_selected", False):
+        page = st.sidebar.radio("Go to", pages)
+    else:
+        page = st.sidebar.radio("Go to", [pages[0]])
 
     if page == "Select Customer":
         page1()
     elif page == "Customer Details":
         page2()
-    elif page == "AI Generate Portfolio":
-        ai_generate_portfolio_page()
-    elif page == "Manual Build Portfolio":
-        manual_build_portfolio_page()
-
 
 if __name__ == "__main__":
     main()
