@@ -2,7 +2,8 @@ import streamlit as st
 import json
 
 st.set_page_config(
-    page_title="Select Customer"
+    page_title="Home",
+    page_icon="👋",
 )
 
 
@@ -24,19 +25,11 @@ st.session_state["CUSTOMER_JSON"] = customer_JSON
 customers = [customer["Customer"]["Name"] for customer in st.session_state.get("CUSTOMER_JSON")]
 
 # Dropdown for selecting a customer
-selected_customer = st.selectbox("Choose a customer", options=customers)
+selected_customer = "John Doe"
 
-# Button to confirm selection
-if st.button("Confirm Selection"):
-    if selected_customer:
-        st.success(f"You have selected {selected_customer}")
-        print(f"You have selected {selected_customer}")
-        # Store the selected customer in session state
-        st.session_state["selected_customer"] = selected_customer
-        st.session_state["customer_selected"] = True
-        st.experimental_rerun()
-    else:
-        st.error("Please select a customer")
+st.session_state["selected_customer"] = "John Doe"
+st.session_state["customer_selected"] = True
+        
 
 
 
@@ -49,3 +42,14 @@ if st.button("Confirm Selection"):
 # else:
 #     pages = ["Select Customer"]
 
+
+
+st.write("# Welcome to Rizq! 👋")
+
+
+st.markdown(
+    """
+    How to use Rizq:
+    1. Use AI generate for our interactive portfolio generator
+"""
+)
