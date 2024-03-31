@@ -50,6 +50,7 @@ st.write("# Welcome to Rizq! 👋")
 st.markdown(
     """
     How to use Rizq:
-    1. Use AI generate for our interactive portfolio generator
+    1. Take a look at your current portfolios in the User portfolio tab
+    2. Generate a new custom portfolio in the generate portfolio tab
 """
 )
