@@ -33,7 +33,7 @@ selected_customer = st.session_state.get("selected_customer", "No customer selec
 # Inputs
 risk = st.slider("Expected returns", min_value=0.0, max_value=30.0, step=0.1)
 num_stocks = st.number_input("Number of Stocks", min_value=1, max_value=20)
-theme = st.text_input("Theme String")
+theme = st.text_area("Theme String")
 positive = st.checkbox("Positive")
 
 # Generate Portfolio button
