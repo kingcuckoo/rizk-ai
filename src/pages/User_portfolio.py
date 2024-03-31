@@ -1,14 +1,14 @@
 import streamlit as st
 
 
-st.set_page_config(page_title="User Portfolio")
+st.set_page_config(page_title="Portfolios")
 
-st.title("Customer Details")
+st.title("Your Portfolios")
 # Retrieve the selected customer from session state
 selected_customer = st.session_state.get("selected_customer", "No customer selected")
 
 # Find the selected customer's data in the JSON
-customer_data = next((customer for customer in st.session_state.get("CUSTOMER_JSON")["Financial Advisor"] if customer["Customer"]["Name"] == selected_customer), None)
+customer_data = next((customer for customer in st.session_state.get("CUSTOMER_JSON") if customer["Customer"]["Name"] == selected_customer), None)
 
 if customer_data:
     st.write(f"Details for {selected_customer}:")
