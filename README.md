@@ -1,34 +1,38 @@
-# rizq-ai
-streamlit frontend
-
-Immediate todo:
-Ai_generate_portfolio:
-2 functions: 
-0. Take in all the items and make an appropriate api call i.e. risk, theme, positive or negative, 
-1. add the generated portfolio to the storage.json
-
-Debt:
-make portfolios tables
-Change navigation
-Add delete button
-Change theme to look slightly better
-Add weighting based on how much we invest and what style(no partial shares right)
 
 
-second page, accordian with all the portfolios displayed as tables and risk ratings, we already have this
-just modify the json appropriately(10-20 minutes)
+# AI-Driven Financial Portfolio Generator
 
-main page, add a dynamic risk and return calculation on top of a data editor for the portfolio that adjusts as we adjust portfolio ticker and number of shares bought(30-40 minutes)
-, maybe add returns estimated by the model (5-10 minutes)
-change the navigation a little bit(5 minutes)
-edit theme(5 minutes)
-Things to do on main page:
+## Overview
+This application is designed to assist financial advisors in creating customized investment portfolios for their clients. By leveraging artificial intelligence, the app provides an intuitive interface for generating portfolios based on various parameters such as risk tolerance, number of stocks, and investment themes. Additionally, users can manually build portfolios, with all data being stored for future reference.
 
-second page, accordian with all the portfolios displayed as tables and risk ratings, we already have this
-just modify the json appropriately(10-20 minutes)
+## Features
+- **Customer Selection**: Choose a client from a predefined list to view or create portfolios.
+- **Portfolio Details**: View detailed information about each portfolio, including stock allocations, risk scores, and investment limits.
+- **AI Generate Portfolio**: Automatically generate a portfolio based on user-defined criteria such as risk level, number of stocks, and investment theme.
+- **Manual Build Portfolio**: Manually create a portfolio with custom stock selections and allocations.
+- **Data Storage**: All portfolio information is stored in a JSON file for easy retrieval and management.
 
-main page, add a dynamic risk and return calculation on top of a data editor for the portfolio that adjusts as we adjust portfolio ticker and number of shares bought(30-40 minutes)
-, maybe add returns estimated by the model (5-10 minutes)
-change the navigation a little bit(5 minutes)
-edit theme(5 minutes)
-Recommendations based on the api: 30-40 minutes
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/financial-portfolio-generator.git
+   ```
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the application:
+   ```bash
+   streamlit run app.py
+   ```
+
+## Usage
+1. **Select a Customer**: Start by selecting a customer from the dropdown menu on the "Select Customer" page.
+2. **View Portfolio Details**: Navigate to the "Customer Details" page to view existing portfolios for the selected customer.
+3. **Generate a New Portfolio**:
+   - Go to the "AI Generate Portfolio" page.
+   - Set the desired risk level, number of stocks, and investment theme.
+   - Optionally, choose whether the portfolio should have a positive or negative outlook.
+   - Click "Generate Portfolio" to create a new portfolio based on the specified criteria.
+   - Review the generated portfolio and click "Add Portfolio to Storage" to save it.
+4. **Manually Build a Portfolio**: On the "Manual Build Portfolio" page, you can manually add stocks and their allocations to create a custom portfolio.
