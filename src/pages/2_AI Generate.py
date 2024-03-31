@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import pandas as pd
+import numpy as np
 
 def add_portfolio_to_storage(portfolio, selected_customer):
     # Path to your storage.json file
@@ -24,6 +25,11 @@ def add_portfolio_to_storage(portfolio, selected_customer):
         json.dump(data, file, indent=4)
 
     st.success("Portfolio added to storage.json")
+def compute_risk(w, data):
+    #resize w to be the same size as the covariance matrix
+    conv = data.cov()
+    w = np.resize(w, conv.shape[0])
+    return np.dot(w, np.dot(data.cov(), w))
 
 st.set_page_config(page_title="Portfolios", page_icon="📈")
 st.title("AI Generate Portfolio")
@@ -47,11 +53,15 @@ if st.button("Generate Portfolio"):
         "positive": positive
     }
     try:
-        response = requests.post(api_endpoint, json=payload)
-        if response.status_code == 200:
-            portfolio = response.json()
-        else:
-            raise Exception("API request failed")
+        data = pd.read_pickle('/Users/saketh/rizq/rizq-ai/src/embedding.pkl')
+        tickers = data.index
+        tickers = np.random.choice(tickers, num_stocks, replace=False)
+        print(tickers)
+        portfolio = data.loc[tickers].values
+        print(portfolio) 
+        risk = compute_risk(portfolio, data)
+        print(risk)
+
     except Exception as e:
         # Load a sample fake portfolio if the API request fails
         portfolio = {
@@ -67,8 +77,9 @@ if st.button("Generate Portfolio"):
 
     # Display the portfolio
     st.write("Generated Portfolio:")
-    df = pd.DataFrame(portfolio["Stocks"])
+    df = pd.DataFrame(data.loc[tickers])
     st.table(df)
+    df.info()
 
     if st.button("Add Portfolio to Storage"):
         add_portfolio_to_storage(portfolio, selected_customer)
