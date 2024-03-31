@@ -1,6 +1,4 @@
 # rizq-ai
-Here's a sample README for your application:
-
 ---
 
 # AI-Driven Financial Portfolio Generator
