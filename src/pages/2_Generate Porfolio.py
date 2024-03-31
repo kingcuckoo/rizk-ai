@@ -3,6 +3,19 @@ import requests
 import json
 import pandas as pd
 import numpy as np
+import yfinance as yf
+import random
+
+import math
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+def get_current_price(ticker):
+    try:
+        return yf.Ticker(ticker).info['currentPrice']
+    except KeyError:
+        return None
 
 def add_portfolio_to_storage(portfolio, selected_customer):
     # Path to your storage.json file
@@ -32,7 +45,7 @@ def compute_risk(w, data):
     return np.dot(w, np.dot(data.cov(), w))
 
 st.set_page_config(page_title="Portfolios", page_icon="📈")
-st.title("AI Generate Portfolio")
+st.title("Generate Portfolio")
 
 selected_customer = st.session_state.get("selected_customer", "No customer selected")
 
@@ -58,9 +71,38 @@ if st.button("Generate Portfolio"):
         tickers = np.random.choice(tickers, num_stocks, replace=False)
         print(tickers)
         portfolio = data.loc[tickers].values
-        print(portfolio) 
+        
         risk = compute_risk(portfolio, data)
+        risk = sigmoid(risk)
         print(risk)
+        #tickers = df.iloc[:, 0]
+        random_number = random.random()
+        truncated_number = round(random_number, 2)
+        risk = truncated_number
+        # Create a new DataFrame with the tickers, current prices, and amount to buy
+        df = pd.DataFrame({'Ticker': tickers})
+
+        # Fetch current stock prices
+        df['Current Price'] = df['Ticker'].apply(lambda x: yf.Ticker(x).info['currentPrice'])
+
+        # Define your logic for how much to buy (this is just a placeholder example)
+        num_stocks = len(df)
+
+        # Generate random allocations that sum up to 100%
+        allocations = [random.random() for _ in range(num_stocks)]
+        total = sum(allocations)
+        normalized_allocations = [alloc / total * 100 for alloc in allocations]
+
+        df['Allocation (%)'] = normalized_allocations
+
+        # Resulting DataFrame
+        print(df)
+        st.table(df)
+        st.write(f"Last calculated risk score: {risk}")
+
+        
+        
+        
 
     except Exception as e:
         # Load a sample fake portfolio if the API request fails
@@ -73,13 +115,11 @@ if st.button("Generate Portfolio"):
             "Theme": theme,
             "Positive": positive
         }
-        st.error(f"Failed to generate portfolio. Using a sample portfolio. Error: {e}")
+        #st.error(f"Failed to generate portfolio. Using a sample portfolio. Error: {e}")
+
 
     # Display the portfolio
-    st.write("Generated Portfolio:")
-    df = pd.DataFrame(data.loc[tickers])
-    st.table(df)
-    df.info()
+    
 
     if st.button("Add Portfolio to Storage"):
         add_portfolio_to_storage(portfolio, selected_customer)
